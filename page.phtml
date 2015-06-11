@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<!-- <link rel="stylesheet" href="css/reset.css"> -->
+	<link rel="stylesheet" href="css/style.css">
+	<title>Document</title>
+</head>
+<body>
+
+	<h1>To Do List</h1>
+	<form method="POST" action="supprimer.php">
+<?php	
+echo "<ul>";
+for ($i=0;$i<count($todo);$i++)
+{
+	// ajouter des crochets au name des checkbox pour récupérer des valeurs ds un tableau...
+echo '<li><input type="checkbox" name="supprimer[]" value="'.$i.'">';//
+			for ($j=0;$j<count($todo[$i]);$j++)	
+			{
+				echo ($todo[$i][$j]);
+				echo "<br>";
+			}
+echo "</li>";
+}
+
+echo "</ul>";
+?>
+<button> Supprimer </button>
+	</form>
+		
+		<form method="POST" action="ajout.php">
+
+			<input type="text" name="title" placeholder="title"> 
+			<br></br>
+			<textarea name="content" id="content" cols="20" rows="10">Text</textarea>
+			<br></br>
+			
+			<select name="date" placeholder=" jour ">
+				<?php for ($i=1;$i<=31;$i++) : ?>
+					<option value="<?php echo $i;?>"><?php echo $i;?></option>
+				<?php endfor;?>
+			</select>
+
+			<select name="months" placeholder=" mois ">
+			<?php 
+				$months=["janvier", "Février", "Mars", "Avril","Mai","Juin", "Juillet","Août", "Septembre" , "Octobre", "Novembre", "Décembre"];
+			 	for ($i=0; $i<12;$i++): 
+			 ?>
+			 	
+			 	<option value=<?php echo "'".$months[$i]."'" ?> > 
+			 		<?php echo $months[$i]; ?>
+			 	</option>
+			 <?php endfor; ?>
+			 	
+
+			 
+			
+			</select>	
+
+			<select name="year" placeholder=" année ">
+				<?php for ($i=date ("Y"); $i<=date ("Y")+5;$i++) : ?>
+					<option value="<?php echo $i ?>"><?php echo $i ?></option>
+				<?php endfor; ?>
+			</select>
+			<br>
+			<select name="priority">
+				<option> Basse </option>
+				<option> Normal </option>
+				<option> Urgent </option>
+
+			</select>
+
+			
+
+			
+	<button> Ajouter </button>
+
+
+
+		</form>
+		
+		
+			<input type="checkbox" name="supprimer" value="0">
+			title 1 - description
+				<input type="checkbox" name="supprimer" value="1">
+			title 2 - description
+		<button> Supprimer </button>
+	</form>
+	
+
+<?php		
+for ($compteur=0;$compteur<count($todo);$compteur++)
+{
+	echo $todo[$compteur][1];
+	echo "<br>";
+	//echo $todo[0][1];
+}
+?>
+
+		
+		
+</body>
+</html>
